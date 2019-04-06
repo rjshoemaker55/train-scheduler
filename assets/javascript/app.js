@@ -39,10 +39,6 @@ database.ref ().on ('child_added', function (childSnapshot) {
   var firstTrainTime = childSnapshot.val ().firstTrainTime;
   var frequency = childSnapshot.val ().frequency;
 
-  console.log ('current time: ' + moment ().format ('hh:mm'));
-
-  console.log ('first train time: ' + firstTrainTime);
-
   var splitFirstTrainTime = firstTrainTime.split(':');
   var firstTrainTimeHours = splitFirstTrainTime[0];
   var firstTrainTimeMinutes = splitFirstTrainTime[1];
@@ -53,11 +49,8 @@ database.ref ().on ('child_added', function (childSnapshot) {
   var currentTime = moment();
   var diffTime = moment().diff(moment(trainTime), "minutes");
   var remainder = diffTime % frequency;
-  console.log("DIFFERENCE IN TIME: " + diffTime);
   var MinutesTillTrain = frequency - remainder;
-  console.log("MINUTES TILL TRAIN: " + MinutesTillTrain);
   var nextArrival = moment().add(MinutesTillTrain, "minutes");
-  console.log("ARRIVAL TIME: " + moment(nextArrival).format("hh:mm"));
   var convertedNextArrival = moment(nextArrival).format("hh:mm a");
 
   var newRow = $ ('<tr>');
